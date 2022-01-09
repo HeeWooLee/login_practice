@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'login_app',
     'login_practice',
     'trip',
+    'friend',
 ]
 
 MIDDLEWARE = [

@@ -20,7 +20,6 @@ def get_detail(request, pk):
 
 
 def create_new(request):
-    print("****")
     userName = request.GET.get('userName')
     tripName = request.GET.get('tripName')
     data = request.GET.get('data')
