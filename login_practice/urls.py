@@ -24,13 +24,13 @@ from friend import views as friend_views
 
 router = routers.DefaultRouter()
 
-router.register(r'tests', login_app_views.TestViewSet)
+router.register(r'login', login_app_views.HeyViewSet)
 #router.register(r'heys', login_practice_views.HeyViewSet)
 router.register(r'trip', trip_views.TripViewSet)
 router.register(r'friend', friend_views.FriendViewSet)
 
 urlpatterns = [
-    path('login_app/', include('login_app.urls')),
+    path('login/', include('login_app.urls')),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('trip/', include('trip.urls')),
