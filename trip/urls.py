@@ -19,7 +19,9 @@ from . import views
 
 urlpatterns = [
  #   path('', views.index, name='index'),
-    path('get/<int:pk>', views.get_detail , name='trip_detail'),
-    path('create/', views.create_new, name='create_new'),
-    path('delete/<int:pk>', views.delete, name='delete'),
+    path('get/<int:pk>', views.get_detail , name='trip_detail'),    #ok
+    path('get/<str:un>/<str:tn>', views.get_practice, name='trip_detail_practice'), #ok
+    path('create/', views.create_new, name='create_new'),   #not ok
+    path('create/<str:un>/<str:tn>/<str:data>/<int:len>', views.create_practice, name='create_new'),    #ok   
+    path('delete/<int:pk>', views.delete, name='delete'),   #ok
 ]

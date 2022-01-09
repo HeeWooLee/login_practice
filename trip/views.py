@@ -1,3 +1,6 @@
+import json
+
+import trip
 from .models import Trip
 from .serializers import TripSerializer
 from django.http import HttpResponse
@@ -17,6 +20,7 @@ def get_detail(request, pk):
 
 
 def create_new(request):
+    print("****")
     userName = request.GET.get('userName')
     tripName = request.GET.get('tripName')
     data = request.GET.get('data')
@@ -25,9 +29,20 @@ def create_new(request):
     newTrip = Trip(userName=userName, tripName= tripName, data = data, totalLength = totalLength)
     newTrip.save()
 
-    return HttpResponse({"pk": newTrip.pk}, content_type='application/json')
+    return HttpResponse(json.dumps({"pk": str(newTrip.pk)}), content_type='application/json')
 
 def delete(request, pk):
     deleteTrip = Trip.objects.get(pk = pk)
     deleteTrip.delete()
-    return HttpResponse({"pk": deleteTrip.pk}, content_type='application/json')
+    return HttpResponse(json.dumps({"pk": str(pk)}), content_type='application/json')
+
+
+def get_practice(request, un, tn):
+    selectedTrip = Trip.objects.filter(userName__exact=un).filter(tripName__exact=tn)
+    return HttpResponse(selectedTrip, content_type='application/json')
+
+
+def create_practice(request, un, tn, data, len):
+    newTrip = Trip(userName=un, tripName= tn, data = data, totalLength = len)
+    newTrip.save()
+    return HttpResponse(json.dumps({"pk": str(newTrip.pk)}), content_type='application/json')
