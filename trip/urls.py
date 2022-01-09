@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
  #   path('', views.index, name='index'),
-    path('get/<str:un>/', views.get_general , name='trip_general'),
-    path('get/<str:un>/<str:tn>/', views.get_detail , name='trip_detail'),
+    path('get/<int:pk>', views.get_detail , name='trip_detail'),
+    path('create/', views.create_new, name='create_new'),
+    path('delete/<int:pk>', views.delete, name='delete'),
 ]

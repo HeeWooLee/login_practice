@@ -14,4 +14,4 @@ class Trip(models.Model):
     totalLength = models.IntegerField()
 
     def __str__(self):
-        return self.tripName + " " + self.totalLength
+        return self.tripName + " " + str(self.totalLength)

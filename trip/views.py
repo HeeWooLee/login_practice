@@ -11,14 +11,23 @@ class TripViewSet(viewsets.ModelViewSet):
 #     def perform_create(self, serializer):
 #         serializer.save()
 
-def get_general(request, un):
-    list_trips = Trip.objects.filter(userName__exact=un)
-    context = {un : list_trips}
-    return HttpResponse(context, content_type='application/json')
+def get_detail(request, pk):
+    selectedTrip = Trip.objects.get(pk = pk)
+    return HttpResponse(selectedTrip, content_type='application/json')
 
 
-def get_detail(request, un, tn):
-    list_trips_general = Trip.objects.filter(userName__exact=un)
-    list_trips_detail = list_trips_general.filter(tripName__exact=tn)
-    context = {tn: list_trips_detail}
-    return HttpResponse(context, content_type='application/json')
+def create_new(request):
+    userName = request.GET.get('userName')
+    tripName = request.GET.get('tripName')
+    data = request.GET.get('data')
+    totalLength = request.GET.get('totalLength')
+    
+    newTrip = Trip(userName=userName, tripName= tripName, data = data, totalLength = totalLength)
+    newTrip.save()
+
+    return HttpResponse({"pk": newTrip.pk}, content_type='application/json')
+
+def delete(request, pk):
+    deleteTrip = Trip.objects.get(pk = pk)
+    deleteTrip.delete()
+    return HttpResponse({"pk": deleteTrip.pk}, content_type='application/json')
