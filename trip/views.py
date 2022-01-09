@@ -11,13 +11,13 @@ class TripViewSet(viewsets.ModelViewSet):
 #     def perform_create(self, serializer):
 #         serializer.save()
 
-def index_general(request, un):
+def get_general(request, un):
     list_trips = Trip.objects.filter(userName__exact=un)
     context = {un : list_trips}
     return HttpResponse(context, content_type='application/json')
 
 
-def index_detail(request, un, tn):
+def get_detail(request, un, tn):
     list_trips_general = Trip.objects.filter(userName__exact=un)
     list_trips_detail = list_trips_general.filter(tripName__exact=tn)
     context = {tn: list_trips_detail}

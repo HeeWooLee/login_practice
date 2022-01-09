@@ -8,12 +8,9 @@ class Test(models.Model):
         return self.test
 
 class Trip(models.Model):
-    userName = models.CharField(max_length=30)
-    tripName = models.CharField(max_length=30)
+    userName = models.TextField()
+    tripName = models.TextField()
     data = models.TextField()
- #   latitude = models.FloatField()
- #   longitutde = models.FloatField()
- #   index = models.IntegerField()
     totalLength = models.IntegerField()
 
     def __str__(self):
