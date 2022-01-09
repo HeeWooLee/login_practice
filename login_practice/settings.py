@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # user made app
     'login_app',
+    'login_practice',
+    'trip',
 ]
 
 MIDDLEWARE = [

@@ -13,3 +13,4 @@ class HeySerializer(serializers.ModelSerializer):
         model = Hey
         # write field which we want to denote
         fields = ('userName', 'passWord')
+

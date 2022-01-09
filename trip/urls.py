@@ -1,4 +1,4 @@
-"""login_practice URL Configuration
+"""trip URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -14,20 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework import routers
-#from login_app import login_app_views
-#from login_practice import login_practice_views
-from trip import views as trip_views
-
-router = routers.DefaultRouter()
-#router.register(r'tests', login_app_views.TestViewSet)
-#router.register(r'heys', login_practice_views.HeyViewSet)
-router.register(r'trip', trip_views.TripViewSet)
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('login_app/', include('login_app.urls')),
-    path('', include(router.urls)),
-    path('admin/', admin.site.urls),
-    path('trip/', include('trip.urls')),
+ #   path('', views.index, name='index'),
+    path('index/<int:un>/', views.index_general , name='trip_general'),
+    path('index/<int:un>/<int:tn>/', views.index_detail , name='trip_detail'),
 ]
