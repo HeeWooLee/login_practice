@@ -27,9 +27,13 @@ def validate(request, usr, passwd):
 
 
 def register(request, usr, passwd):
-    newPerson = Hey(userName=usr, passWord=passwd)
-    newPerson.save()
-    return HttpResponse(json.dumps({"pk":str(newPerson.pk)}), content_type='application/json')
+    person = Hey.objects.filter(userName__exact=usr)
+    if person:
+        return HttpResponse(json.dumps({"pk": "-1"}), content_type='application/json')
+    else:   
+        newPerson = Hey(userName=usr, passWord=passwd)
+        newPerson.save()
+        return HttpResponse(json.dumps({"pk":str(newPerson.pk)}), content_type='application/json')
 
 
 def uservalid(request, usr):
