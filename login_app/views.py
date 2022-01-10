@@ -30,3 +30,11 @@ def register(request, usr, passwd):
     newPerson = Hey(userName=usr, passWord=passwd)
     newPerson.save()
     return HttpResponse(json.dumps({"pk":str(newPerson.pk)}), content_type='application/json')
+
+
+def uservalid(request, usr):
+    person = Hey.objects.filter(userName__exact=usr)
+    if not person:
+        return HttpResponse(json.dumps({"pk": "-1"}), content_type='application/json')
+    else:
+        return HttpResponse(json.dumps({"pk": "1"}), content_type='application/json')
