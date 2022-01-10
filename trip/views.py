@@ -5,6 +5,7 @@ from .models import Trip
 from .serializers import TripSerializer
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.core import serializers
 from rest_framework import viewsets
 
 class TripViewSet(viewsets.ModelViewSet):
@@ -15,8 +16,9 @@ class TripViewSet(viewsets.ModelViewSet):
 #         serializer.save()
 
 def get_detail(request, pk):
-    selectedTrip = Trip.objects.get(pk = pk)
-    return HttpResponse(selectedTrip, content_type='application/json')
+    st = Trip.objects.get(pk = pk)
+    d = {"userName": st.userName,"tripName":st.tripName,"data":st.data,"totalLength":st.totalLength}
+    return HttpResponse(json.dumps(d), content_type='application/json')
 
 
 def create_new(request):
@@ -37,8 +39,9 @@ def delete(request, pk):
 
 
 def get_practice(request, un, tn):
-    selectedTrip = Trip.objects.filter(userName__exact=un).filter(tripName__exact=tn)
-    return HttpResponse(selectedTrip, content_type='application/json')
+    st = Trip.objects.filter(userName__exact=un).filter(tripName__exact=tn).first()
+    d = {"userName": st.userName,"tripName":st.tripName,"data":st.data,"totalLength":st.totalLength}
+    return HttpResponse(json.dumps(d), content_type='application/json')
 
 
 def create_practice(request, un, tn, data, len):
